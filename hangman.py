@@ -57,14 +57,16 @@ class Processes:
     def __init__(self):
         pass
 
-    def validate_user_input(self, player):
+    @staticmethod
+    def validate_user_input(player):
         expression=re.match(r'^[A-z]$',player.answer)
         if expression == None or len(player.answer)>1:
             print('\nPlease guess a single alphabet')
         else:
             player.guess_validation_incomplete = False
 
-    def check_answer_update_lives(self,bank,player):
+    @staticmethod
+    def check_answer_update_lives(bank,player):
         if player.answer in bank.letters_already_guessed:
             print('\nLetter already guessed.')
                 
