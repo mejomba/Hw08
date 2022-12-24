@@ -29,8 +29,11 @@ class Bank:
             word = json.loads(response.text)
             self.api_response_status = True
             self.current_word = word['word']
+            for i in self.current_word:
+                self.current_word_display.append('_')
+            print(f'Word is {self.current_word} letters long.')
+            print(self.current_word_display)
         else:
-            self.current_word = choice(self.topics[self.current_topic])
             self.api_response_status = False
 
     def pick_word(self):
