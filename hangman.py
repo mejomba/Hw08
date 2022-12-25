@@ -48,7 +48,7 @@ class Bank:
 
 class Player:
     def __init__(self):
-        self.lives = 10
+        self.lives = None
         self.answer = ''
         self.guess_validation_incomplete = True
 
@@ -102,6 +102,7 @@ class Main:
             word_bank.get_word()
             if not word_bank.api_response_status:
                 word_bank.pick_word()
+            player1.lives = 3 * len(word_bank.current_word)
 
             while word_bank.not_solved and player1.lives > 0:
                 while player1.guess_validation_incomplete:
