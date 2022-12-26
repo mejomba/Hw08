@@ -24,16 +24,17 @@ class Bank:
         print(f'Topic: {self.current_topic}')
 
     def get_word(self):
-        response = requests.get(f"{self.api}", headers={'X-Api-Key': f"{self.api_key}"}, params={type:'noun'})
-        if response.status_code == 200:
-            word = json.loads(response.text)
-            self.api_response_status = True
-            self.current_word = word['word']
-            for i in self.current_word:
-                self.current_word_display.append('_')
-            print(f'Word is {len(self.current_word)} letters long.')
-            print(self.current_word_display)
-        else:
+        try:
+            response = requests.get(f"{self.api}", headers={'X-Api-Key': f"{self.api_key}"}, params={type:'noun'})
+            if response.status_code == 200:
+                word = json.loads(response.text)
+                self.api_response_status = True
+                self.current_word = word['word']
+                for i in self.current_word:
+                    self.current_word_display.append('_')
+                print(f'Word is {len(self.current_word)} letters long.')
+                print(self.current_word_display)
+        except requests.exceptions.RequestException:
             self.api_response_status = False
 
     def pick_word(self):
